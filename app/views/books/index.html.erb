@@ -1,0 +1,23 @@
+<h1 class="text-center">📚 Available Books</h1>
+
+<div class="row">
+  <% @books.each do |book| %>
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= book.title %></h5>
+          <p class="card-text"><strong>Author:</strong> <%= book.author %></p>
+          <p class="card-text"><strong>ISBN:</strong> <%= book.isbn %></p>
+
+          <% if book.available? %>
+            <p class="text-success"><strong>Available</strong></p>
+            <%= link_to "Borrow", borrow_book_path(book), method: :post, class: "btn btn-primary" %>
+          <% else %>
+            <p class="text-danger"><strong>Borrowed</strong></p>
+            <%= link_to "Return", return_book_path(book), method: :post, class: "btn btn-warning" if book.borrowed_by?(current_user) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

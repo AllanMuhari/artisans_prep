@@ -1,0 +1,27 @@
+<h1 class="text-center">👤 <%= current_user.name %>'s Profile</h1>
+
+<h3>Your Borrowed Books</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
+      <th>Due Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @borrowings.each do |borrowing| %>
+      <tr>
+        <td><%= borrowing.book.title %></td>
+        <td><%= borrowing.book.author %></td>
+        <td><%= borrowing.book.isbn %></td>
+        <td><%= borrowing.due_date.strftime("%b %d, %Y") %></td>
+        <td>
+          <%= link_to "Return", return_book_path(borrowing.book), method: :post, class: "btn btn-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

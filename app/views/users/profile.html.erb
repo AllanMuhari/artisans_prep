@@ -1,0 +1,12 @@
+<h1>Your Borrowed Books</h1>
+
+<ul>
+  <% @borrowings.each do |borrowing| %>
+    <li>
+      <%= borrowing.book.title %> (Due: <%= borrowing.due_date %>)
+      <%= button_to "Return", return_book_borrowing_path(borrowing), method: :post %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Back to books", books_path %>
